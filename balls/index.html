@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Playroom</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+</head>
+
+<body>
+    <!-- @import "./header.html" -->
+
+    <div>
+        <canvas id="canvas" width="1000" height="700"></canvas>
+    </div>
+
+    <!-- @import "./footer.html" -->
+
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+
+        let width = canvas.width;
+        let height = canvas.height;
+
+        let colors = ["Red", "Orange", "Yellov", "Green", "Blue", "Purple", "Brown", "Gold", "Turquoise", "DeepPink", "SkyBlue", "LimeGreen",
+            "LightBlue", "#d713c7", "#9d4aac", "#2fdcce", "#08b20c", "#f9f003", "#f08cda", "#fb720e", "#240efb"
+        ];
+        let radius = 40;
+
+
+        let Ball = function() {
+            this.x = 100;
+            this.y = 100;
+            this.xSpeed = (Math.random() * 5);
+            this.ySpeed = (Math.random() * 5);
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.radius = radius
+        };
+
+        let circle = function(x, y, radius, fillCircle) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            if (fillCircle) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        };
+        Ball.prototype.draw = function() {
+            circle(this.x, this.y, this.radius, true);
+            ctx.fillStyle = this.color;
+        };
+
+        Ball.prototype.move = function() {
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        };
+
+        Ball.prototype.checkCollision = function() {
+                if (this.x < 0 || this.x > width) {
+                    this.xSpeed = -this.xSpeed;
+                }
+                if (this.y < 0 || this.y > height) {
+                    this.ySpeed = -this.ySpeed;
+                }
+            }
+            /**
+        Ball.prototype.checkCollision = function () {
+            var wallCollision function () {
+                if (this.x < 0 || this.x > width) {
+                    this.xSpeed = -this.xSpeed;
+                }
+                if (this.y < 0 || this.y > height) {
+                    this.ySpeed = -this.ySpeed;
+                } 
+            }
+        }
+            var BallsCollision = false;
+          
+          for (var i = 0; i < balls.length; i++) {
+              for (var j = 1; j < balls.length - 1; j++) {
+             if (balls[i].equal(balls[j])) {
+                BallsCollision = true;
+              }
+            }
+    
+          return wallCollision || selfCollision;
+        }; **/
+            // <!--Прописать функцию, которая будет проверять, не столкнулися ли мячи между собой и при столкновении менять их траекторию-->
+            /**  Ball.prototype.equal = function (otherBall) {
+           return this.x === otherBall.x && this.y === otherBall.y;
+        }; **/
+
+        let balls = [];
+
+        for (var i = 0; i < 10; i++) {
+
+            balls[i] = new Ball();
+        }
+
+
+        setInterval(function() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (var i = 0; i < 10; i++) {
+                balls[i].draw();
+                balls[i].move();
+                balls[i].checkCollision();
+            }
+            ctx.strokeRect(0, 0, width, height);
+        }, 30);
+    </script>
+
+</body>
+
+</html>

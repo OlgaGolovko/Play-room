@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stamp</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/stamp.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!--#include file="../header.html" -->
+        <!-- @import "../header.html" -->
+
+        <div class="stamp__blok blok">
+
+            <div class="page-title-container">
+                <h2 class="page-title">Печати</h2>
+            </div>
+            <canvas class="canvas" id="canvas1" width="1900" height="1000"></canvas>
+        </div>
+    </div>
+    <script>
+        let canvas1 = document.getElementById("canvas1");
+        let ctx = canvas1.getContext("2d");
+        // <!--Рисуем снеговика-->
+
+        let drawSnowman = function(x, y) {
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "Black";
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(x, (y + 70), 40, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.fillStyle = "Orange";
+            ctx.beginPath();
+            ctx.arc(x, (y + 3), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.fillStyle = "Black";
+            ctx.beginPath();
+            ctx.arc((x - 10), (y - 7), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc((x + 10), (y - 7), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, (y + 70), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, (y + 70 - 20), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x, (y + 70 + 20), 5, 0, Math.PI * 2, false);
+            ctx.fill();
+        };
+
+        $("#canvas1").click(function(event) {
+            let x = event.offsetX;
+            let y = event.offsetY;
+            drawSnowman(x, y);
+        })
+    </script>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
