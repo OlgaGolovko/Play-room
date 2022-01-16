@@ -163,7 +163,8 @@ h1 {
   background-color: #ff9073;
   font-size: 40px;
   line-height: 60px;
-  margin: 60px; }
+  margin: 60px;
+  paddding: 20px; }
   .link a {
     color: #920031; }
 
